@@ -127,6 +127,7 @@ import android.util.Log;
 import android.util.Slog;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
+import android.view.Gravity;
 import android.view.IWindowManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -153,6 +154,7 @@ import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.graphics.PixelFormat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
@@ -232,6 +234,7 @@ import com.android.systemui.statusbar.info.DataUsageView;
 import com.android.systemui.statusbar.KeyboardShortcuts;
 import com.android.systemui.statusbar.KeyguardIndicationController;
 import com.android.systemui.statusbar.NavigationBarController;
+import com.android.systemui.statusbar.appcirclesidebar.AppCircleSidebar;
 import com.android.systemui.statusbar.NotificationListener;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationMediaManager;
@@ -517,6 +520,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mTicking;
     private int mTickerAnimationMode;
     private int mTickerTickDuration;
+
+    protected AppCircleSidebar mAppCircleSidebar;
 
     // for disabling the status bar
     private int mDisabled1 = 0;
@@ -1089,6 +1094,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         putComponent(HeadsUpManager.class, mHeadsUpManager);
 
         createNavigationBar(result);
+        addAppCircleSidebar();
 
         if (ENABLE_LOCKSCREEN_WALLPAPER && mWallpaperSupported) {
             mLockscreenWallpaper = new LockscreenWallpaper(mContext, this, mHandler);
@@ -2386,7 +2392,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mMetricsLogger.count(NotificationPanelView.COUNTER_PANEL_OPEN_QS, 1);
             }
         }
-
     }
 
     @Override
@@ -6027,4 +6032,38 @@ public class StatusBar extends SystemUI implements DemoMode,
         return mStatusBarMode;
     }
 
+    protected void addAppCircleSidebar() {
+        if (mAppCircleSidebar == null) {
+            mAppCircleSidebar = (AppCircleSidebar) View.inflate(mContext, R.layout.app_circle_sidebar, null);
+            mWindowManager.addView(mAppCircleSidebar, getAppCircleSidebarLayoutParams());
+        }
+    }
+
+    protected void removeAppCircleSidebar() {
+        if (mAppCircleSidebar != null) {
+            mWindowManager.removeView(mAppCircleSidebar);
+        }
+    }
+
+    protected WindowManager.LayoutParams getAppCircleSidebarLayoutParams() {
+        int maxWidth =
+                mContext.getResources().getDimensionPixelSize(R.dimen.app_sidebar_trigger_width);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+                maxWidth,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL,
+                0
+                | WindowManager.LayoutParams.FLAG_TOUCHABLE_WHEN_WAKING
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
+                PixelFormat.TRANSLUCENT);
+        lp.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_NO_MOVE_ANIMATION;
+        lp.gravity = Gravity.TOP | Gravity.RIGHT;
+        lp.setTitle("AppCircleSidebar");
+
+        return lp;
+    }
 }
