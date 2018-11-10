@@ -52,6 +52,13 @@ public class ThemesUtils {
         "com.android.system.switch.oneplus", // 2
     };
 
+    // Notification themes
+    private static final String[] NOTIFICATION_THEMES = {
+        "com.android.system.notification.light", // 0
+        "com.android.system.notification.dark", // 1
+        "com.android.system.notification.black", // 2
+    };
+
     public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {
         if (switchStyle == 2) {
             stockSwitchStyle(om, userId);
@@ -70,6 +77,34 @@ public class ThemesUtils {
             String switchtheme = SWITCH_THEMES[i];
             try {
                 om.setEnabled(switchtheme,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Switches notification style to user selected.
+    public static void updateNotificationStyle(IOverlayManager om, int userId, int notificationStyle) {
+        if (notificationStyle == 0) {
+            stockNotificationStyle(om, userId);
+        } else {
+            try {
+                om.setEnabled(NOTIFICATION_THEMES[notificationStyle],
+                        true, userId);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change notification theme", e);
+            }
+        }
+    }
+
+    // Switches notification style back to stock.
+    public static void stockNotificationStyle(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 1; i < NOTIFICATION_THEMES.length; i++) {
+            String notificationtheme = NOTIFICATION_THEMES[i];
+            try {
+                om.setEnabled(notificationtheme,
                         false /*disable*/, userId);
             } catch (RemoteException e) {
                 e.printStackTrace();

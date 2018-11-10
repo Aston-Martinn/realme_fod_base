@@ -4224,6 +4224,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         ThemesUtils.stockSwitchStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Switches notification style from stock to custom
+    public void updateNotificationStyle() {
+         int notificationStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.NOTIFICATION_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+        ThemesUtils.updateNotificationStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), notificationStyle);
+    }
+
+    // Unload all notification styles back to stock
+    public void stockNotificationStyle() {
+        ThemesUtils.stockNotificationStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     private void updateDozingState() {
         Trace.traceCounter(Trace.TRACE_TAG_APP, "dozing", mDozing ? 1 : 0);
         Trace.beginSection("StatusBar#updateDozingState");
@@ -5438,6 +5450,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SWITCH_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NOTIFICATION_STYLE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5481,6 +5496,10 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.SWITCH_STYLE))) {
                 stockSwitchStyle();
                 updateSwitchStyle();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NOTIFICATION_STYLE))) {
+                stockNotificationStyle();
+                updateNotificationStyle();
             }
             update();
         }

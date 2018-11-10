@@ -6860,6 +6860,14 @@ public final class Settings {
         private static final Validator QS_PANEL_BG_USE_NEW_TINT_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * 0 - Light
+         * 1 - Dark
+         * 2 - Black
+         * @hide
+         */
+        public static final String NOTIFICATION_STYLE = "notification_style";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -7245,6 +7253,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_FW);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_ACCENT);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
+            PRIVATE_SETTINGS.add(NOTIFICATION_STYLE); 
         }
 
         /**
