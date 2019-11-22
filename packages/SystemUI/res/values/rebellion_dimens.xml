@@ -90,5 +90,8 @@
     <dimen name="app_sidebar_icon_width">72dp</dimen>  
     <dimen name="app_sidebar_icon_height">72dp</dimen>  
 
+    <!-- The starting padding for the clock in the status bar. -->
+    <dimen name="status_bar_right_clock_starting_padding">2dp</dimen>
+
 </resources>
 
