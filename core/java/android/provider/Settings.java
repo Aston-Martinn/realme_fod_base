@@ -6882,6 +6882,15 @@ public final class Settings {
         private static final Validator ACCENT_COLOR_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Gradient Color
+         * @hide
+         */
+        public static final String GRADIENT_COLOR = "gradient_color";
+
+        /** @hide */
+        private static final Validator GRADIENT_COLOR_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -7035,6 +7044,7 @@ public final class Settings {
             QS_PANEL_BG_USE_ACCENT,
             QS_PANEL_BG_USE_NEW_TINT,
             ACCENT_COLOR,
+            GRADIENT_COLOR,
         };
 
         /**
@@ -7271,6 +7281,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NOTIFICATION_STYLE); 
             PRIVATE_SETTINGS.add(QS_HEADER_STYLE);
             PRIVATE_SETTINGS.add(ACCENT_COLOR);
+            PRIVATE_SETTINGS.add(GRADIENT_COLOR);
         }
 
         /**
@@ -7471,6 +7482,7 @@ public final class Settings {
             VALIDATORS.put(QS_PANEL_BG_USE_ACCENT, QS_PANEL_BG_USE_ACCENT_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
             VALIDATORS.put(ACCENT_COLOR, ACCENT_COLOR_VALIDATOR);
+            VALIDATORS.put(GRADIENT_COLOR, GRADIENT_COLOR_VALIDATOR);
         }
 
         /**
