@@ -2,4 +2,6 @@
 <resources>
     <!-- Weather condition icon  -->
     <dimen name="weather_icon_size">24dp</dimen>
+
+    <dimen name="clock_oronos_outline_size">4dp</dimen> 
 </resources>
