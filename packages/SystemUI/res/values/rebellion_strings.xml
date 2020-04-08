@@ -321,4 +321,7 @@
     <string name="content_setup_dismiss">Continue</string>
     <string name="status_bar_recent_inspect_item_title">Statusbar</string>
 
+    <!-- Alerting notification header label -->
+    <string name="notification_section_header_alerting">Alerting notifications</string>
+
 </resources>
