@@ -307,4 +307,7 @@
     <!-- Rebellion Theme -->
     <java-symbol type="color" name="theme_background_rebellion" />
 
+    <!-- Enable face auth when swiping security view -->
+    <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
+
 </resources>
