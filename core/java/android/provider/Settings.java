@@ -11981,6 +11981,7 @@ public final class Settings {
         public static final String AMBIENT_VISUALIZER_OPACITY = "ambient_visualizer_opacity";
 
         /**
+         * @hide
          * Setting to allow setting rounded corner size and content padding
          */
         public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
