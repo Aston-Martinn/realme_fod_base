@@ -349,6 +349,9 @@ public class VolumeDialogImpl implements VolumeDialog,
         mExpandRowsView = mDialog.findViewById(R.id.expandable_indicator_container);
         mExpandRows = mDialog.findViewById(R.id.expandable_indicator);
 
+        if (mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide))
+            mExpandRows.setDefaultDirection(false);
+
         if (mRows.isEmpty()) {
             if (!AudioSystem.isSingleVolume(mContext)) {
                 addRow(STREAM_ACCESSIBILITY, R.drawable.ic_volume_accessibility,
