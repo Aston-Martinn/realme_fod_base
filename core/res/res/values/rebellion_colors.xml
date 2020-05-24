@@ -26,4 +26,7 @@
     <!-- QS Accent -->
     <color name="qs_accent">@color/accent_device_default_light</color>
 
+    <!-- Rebellion Theme -->
+    <color name="theme_background_rebellion">#ae000000</color>
+
 </resources>
