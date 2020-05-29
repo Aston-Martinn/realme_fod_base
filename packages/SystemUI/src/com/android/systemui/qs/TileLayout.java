@@ -147,7 +147,8 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
             mRows = Settings.System.getIntForUser(resolver,
                     Settings.System.QS_LAYOUT_ROWS, 3,
                     UserHandle.USER_CURRENT);
-        } else {
+        }
+        else {
             mRows = Settings.System.getIntForUser(resolver,
                     Settings.System.QS_LAYOUT_ROWS_LANDSCAPE, 2,
                     UserHandle.USER_CURRENT);
@@ -220,10 +221,10 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
         boolean isPortrait = res.getConfiguration().orientation
                 == Configuration.ORIENTATION_PORTRAIT;
         int columns = Settings.System.getIntForUser(
-                mContext.getContentResolver(), Settings.System.QS_LAYOUT_COLUMNS, defaultColumns,
+                mContext.getContentResolver(), Settings.System.QS_LAYOUT_COLUMNS, 3,
                 UserHandle.USER_CURRENT);
         int columnsLandscape = Settings.System.getIntForUser(
-                mContext.getContentResolver(), Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE, defaultColumns,
+                mContext.getContentResolver(), Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE, 2,
                 UserHandle.USER_CURRENT);
         int rows = Settings.System.getIntForUser(
                 mContext.getContentResolver(), Settings.System.QS_LAYOUT_ROWS, defaultRows,

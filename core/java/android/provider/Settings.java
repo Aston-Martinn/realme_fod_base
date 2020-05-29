@@ -5158,7 +5158,8 @@ public final class Settings {
         public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
 
         /** @hide */
-        private static final Validator QS_LAYOUT_ROWS_VALIDATOR = ANY_INTEGER_VALIDATOR;
+        private static final Validator QS_LAYOUT_ROWS_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(1, 4);
 
         /**
          * @hide
@@ -6420,7 +6421,7 @@ public final class Settings {
         public static final String QS_LAYOUT_ROWS_LANDSCAPE = "qs_layout_rows_landscape";
         /** @hide */
         private static final Validator QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR =
-                ANY_INTEGER_VALIDATOR;
+                new SettingsValidators.InclusiveIntegerRangeValidator(1, 4);
 
         /**
          * Whether to show charging animation on lock screen
