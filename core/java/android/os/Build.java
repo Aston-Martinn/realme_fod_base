@@ -1153,7 +1153,6 @@ public class Build {
             }
         }
 
-        /* TODO: Figure out issue with checks failing
         if (!TextUtils.isEmpty(bootimage)) {
             if (!Objects.equals(system, bootimage)) {
                 Slog.e(TAG, "Mismatched fingerprints; system reported " + system
@@ -1170,14 +1169,13 @@ public class Build {
             }
         }
 
-        if (!TextUtils.isEmpty(requiredRadio)) {
+        if (!TextUtils.isEmpty(requiredRadio) && !TextUtils.isEmpty(currentRadio)) {
             if (!Objects.equals(currentRadio, requiredRadio)) {
                 Slog.e(TAG, "Mismatched radio version: build requires " + requiredRadio
                         + " but runtime reports " + currentRadio);
                 return false;
             }
         }
-        */
 
         return true;
     }
