@@ -82,8 +82,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mIsCircleShowing;
     private boolean mIsAuthenticated;
 
-    private float mCurrentDimAmount = 0.0f;
-
     private Handler mHandler;
 
     private LockPatternUtils mLockPatternUtils;
@@ -236,16 +234,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            float drawingDimAmount = mParams.dimAmount;
-            if (mCurrentDimAmount == 0.0f && drawingDimAmount > 0.0f) {
-                dispatchPress();
-                mCurrentDimAmount = drawingDimAmount;
-            } else if (mCurrentDimAmount > 0.0f && drawingDimAmount == 0.0f) {
-                mCurrentDimAmount = drawingDimAmount;
-            }
-        });
-
         updateCutoutFlags();
 
         Dependency.get(ConfigurationController.class).addCallback(this);
@@ -365,6 +353,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         if (mIsDreaming) mWakeLock.acquire(500);
         setDim(true);
         updateAlpha();
+        dispatchPress();
 
         mPaintFingerprint.setColor(mColor);
         setImageResource(R.drawable.fod_icon_pressed);
