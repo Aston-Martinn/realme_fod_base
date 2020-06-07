@@ -59,7 +59,7 @@ import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FODCircleView extends ImageView implements Handler.Callback {
+public class FODCircleView extends ImageView implements ConfigurationListener, Handler.Callback {
     private final int MSG_HBM_OFF = 1001;
     private final int MSG_HBM_ON = 1002;
 
